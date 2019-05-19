@@ -40,17 +40,14 @@ class Game < Gosu::Window
         tl = update_interval / 1000.0
         @ball_y_vel += tl * GRAVITY
         @ball_y += @ball_y_vel * tl
-        @walls.update 3
-        if @ball_y < -40 || @ball_y > 535
-            reset
-        end
+        @walls.update 3 , @ball_y
     end
 
     def draw
         @images[:background].draw(0,0,0)
         @images[:foreground].draw(-@scroll_x,383,0)
         @images[:foreground].draw(-@scroll_x + @images[:foreground].width,383,0)
-        @images[:ball].draw(70,@ball_y,0)
+        @images[:ball].draw(55,@ball_y,0)
         @walls.draw
     end
 end
