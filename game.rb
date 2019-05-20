@@ -13,6 +13,7 @@ class Game < Gosu::Window
         @scroll_x = 0
         @ball_y = 200
         @ball_y_vel = 0
+        @font = Gosu::Font.new 30, name: './font/04B_19__.ttf'
         @images = {
             background: Gosu::Image.new(self,'img/background.png',false),
             foreground: Gosu::Image.new(self,'img/ground.png',true),
@@ -41,6 +42,7 @@ class Game < Gosu::Window
         @ball_y_vel += tl * GRAVITY
         @ball_y += @ball_y_vel * tl
         @walls.update 3 , @ball_y
+        close if @ball_y < -100 || @ball_y > 600
     end
 
     def draw
@@ -48,6 +50,7 @@ class Game < Gosu::Window
         @images[:foreground].draw(-@scroll_x,383,0)
         @images[:foreground].draw(-@scroll_x + @images[:foreground].width,383,0)
         @images[:ball].draw(55,@ball_y,0)
+        @font.draw @walls.score, 144, 100,2
         @walls.draw
     end
 end
