@@ -1,7 +1,7 @@
 require './lib/pipe'
 
 class Pipes
-  attr_reader :score
+  attr_reader :score ,:a
   def initialize width, height
     @a,@score = 0
     @score= 0
@@ -19,21 +19,22 @@ class Pipes
 
   def update state, ball
     @ball = ball
-    @current.update
-    @next.update
-    if @current.gone? 
-      @current = @next
-      @next = Pipe.new @window_width, @window_height, @current.x+@window_width*2/3
+    if @ball >= 370
+      @a = false
     end
-    if @ball < -40 || @ball > 535
-      reset
-    end
-    if @current.x < 80 && @current.x > 0 
-      if (@ball < @current.send-20) && (@ball > @current.send-140)
+    if @current.x <= 75 && @current.x >= -2 
+      if (@ball < @current.send-25) && (@ball > @current.send-141)
         @a = true
       else
         @a = false
-        reset
+      end
+    end
+    if @a != false 
+      @current.update
+      @next.update
+      if @current.gone? 
+        @current = @next
+        @next = Pipe.new @window_width, @window_height, @current.x+@window_width*2/3
       end
     end
     if @current.x == 0 && @a == true

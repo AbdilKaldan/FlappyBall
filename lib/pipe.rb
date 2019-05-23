@@ -3,7 +3,7 @@ class Pipe
   def initialize width, height, x
     @up = Gosu::Image.new './img/tube_up.png'
     @down = Gosu::Image.new './img/tube_down.png'
-    @up_height = rand(@up.height*2/3) + 50
+    @up_height = rand(50..212)
     @gap = 141 # gap = 141
     @send = @up_height + @gap
     @x = x
@@ -18,7 +18,7 @@ class Pipe
   end
 
   def draw
-    @up.draw @x, @up_height-@up.height, 1
-    @down.draw @x, @send , 1
+    @up.draw @x, @up_height-@up.height, 0
+    @down.draw @x, @send , 0
   end
 end
