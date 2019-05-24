@@ -51,7 +51,11 @@ class Game < Gosu::Window
             end
         else
             @curr.dead = true
-            puts @state
+            if button_down? Gosu::KbSpace
+                @walls.a = true
+                reset
+                @ball_y = 200
+            end
         end
     end
 

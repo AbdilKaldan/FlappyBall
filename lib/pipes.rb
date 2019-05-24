@@ -1,7 +1,7 @@
 require './lib/pipe'
 
 class Pipes
-  attr_reader :score ,:a
+  attr_accessor :score ,:a
   def initialize width, height
     @a,@score = 0
     @score= 0
