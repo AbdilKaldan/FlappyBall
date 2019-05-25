@@ -1,5 +1,5 @@
 # FlappyBall
-![FlappyBall](https://media.giphy.com/media/3gPI82ltmEDIUF4nqW/giphy.gif)
+![FlappyBall](https://media.giphy.com/media/uVsxu652urVm6REU6d/giphy.gif)
 ## Install
     gem install gosu
     ruby game.rb
