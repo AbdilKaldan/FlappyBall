@@ -16,7 +16,7 @@ class Game < Gosu::Window
         @images = {
             background: Gosu::Image.new(self,'img/background.png',false),
             foreground: Gosu::Image.new(self,'img/ground.png',true),
-            ball: Gosu::Image.new(self,'img/blue1.png',false),
+            ball: Gosu::Image.new(self,'img/ball.png',false),
         }
         @walls = Pipes.new width, height
         @curr= Curr.new
@@ -24,6 +24,9 @@ class Game < Gosu::Window
     end
 
     def button_down(button)
+        if button == Gosu::KbR
+            File.write('score.txt',0)
+        end
         close if button == Gosu::KbEscape
         if button == Gosu::KbSpace
             @ball_y_vel = -JUMP_VEL
