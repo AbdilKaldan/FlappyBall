@@ -16,7 +16,7 @@ class Game < Gosu::Window
         @images = {
             background: Gosu::Image.new(self,'img/background.png',false),
             foreground: Gosu::Image.new(self,'img/ground.png',true),
-            ball: Gosu::Image.new(self,'img/ball.png',false),
+            ball: Gosu::Image.new(self,'img/blue1.png',false),
         }
         @walls = Pipes.new width, height
         @curr= Curr.new
@@ -37,7 +37,7 @@ class Game < Gosu::Window
 
     def update 
         if @walls.a != false
-            @scroll_x +=3
+            @scroll_x +=1.5
             if @scroll_x > @images[:foreground].width
                 @scroll_x = 0
             end
@@ -51,6 +51,11 @@ class Game < Gosu::Window
             end
         else
             @curr.dead = true
+            @score = File.read('score.txt').to_i
+            if  @walls.score > @score
+                File.write('score.txt',@walls.score)
+                @score = @walls.score
+            end
             if button_down? Gosu::KbSpace
                 @walls.a = true
                 reset
@@ -65,8 +70,8 @@ class Game < Gosu::Window
         @images[:foreground].draw(-@scroll_x,383,0)
         @images[:foreground].draw(-@scroll_x + @images[:foreground].width,383,0)
         @images[:ball].draw(50,@ball_y,0)
-        @font.draw @walls.score, 144, 100,2
-        @curr.draw
+        @font.draw @walls.score, 144, 100, 2
+        @curr.draw @score
     end
 end
 
